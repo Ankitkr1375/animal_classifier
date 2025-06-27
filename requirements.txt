@@ -1,6 +1,6 @@
-fastapi
-gdown
-numpy
-Pillow
-tensorflow
-uvicorn
+fastapi==0.115.12
+gdown==5.2.0
+numpy==1.26.4
+Pillow==10.4.0
+tensorflow==2.18.0
+uvicorn==0.34.2
