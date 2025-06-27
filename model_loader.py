@@ -1,7 +1,7 @@
 import os
 import tensorflow as tf
 from utils import download_from_gdrive
-
+import tempfile
 models = {}
 
 GDRIVE_FILE_IDS = {
@@ -14,7 +14,7 @@ def get_model(animal):
     if animal in models:
         return models[animal]
 
-    tmp_path = f"/tmp/{animal}.keras"
+    tmp_path = os.path.join(tempfile.gettempdir(), f"{animal}.keras")
 
     if not os.path.exists(tmp_path):
         print(f"Downloading {animal} model...")
