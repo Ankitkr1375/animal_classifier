@@ -2,6 +2,7 @@ import gdown
 import numpy as np
 from PIL import Image
 from io import BytesIO
+import tensorflow as tf
 
 def download_from_gdrive(file_id, dest_path):
     """
@@ -12,8 +13,10 @@ def download_from_gdrive(file_id, dest_path):
 def read_image(image_bytes):
     """
     Reads and preprocesses the uploaded image.
-    Resizes to 224x224 and normalizes pixel values.
+    Applies ResNet50 preprocessing.
     """
     img = Image.open(BytesIO(image_bytes)).convert("RGB")
-    img = img.resize((224, 224))  # Resize to match model input size
-    return np.array(img) / 255.0  # Normalize to [0, 1] range
+    img = img.resize((224, 224))
+    img_array = tf.keras.preprocessing.image.img_to_array(img)
+    img_array = tf.keras.applications.resnet50.preprocess_input(img_array)
+    return img_array
