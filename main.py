@@ -5,6 +5,7 @@ from utils import read_image
 import tensorflow as tf
 import numpy as np
 import uvicorn
+from med import get_medicine_suggestion  # 🔗 Link to Gemini
 
 app = FastAPI()
 
@@ -25,13 +26,30 @@ async def predict(
     image_bytes = await file.read()
     img_array = read_image(image_bytes)
 
+    # Load the appropriate model based on the animal type
+    # if animal_type == "dog":
+    #     model = tf.keras.models.load_model("Dog.keras")
+    # elif animal_type == "cat":
+    #     model = tf.keras.models.load_model("cat.keras")
+    # else:
+    #     model = tf.keras.models.load_model("Lumpy.keras")
     model = get_model(animal_type)  # Lazy load model
+    # Predict the label
     prediction = model.predict(np.expand_dims(img_array, axis=0))
     label_index = np.argmax(prediction)
     label = CLASS_NAMES[animal_type][label_index]
 
-    # 🔍 Debug info
-    print(f"Prediction raw values: {prediction}")
-    print(f"Predicted index: {label_index}, label: {label}")
+    # Normalize label for healthy cases
+    if label in ["Health", "Lumpy Skin"]:
+        label = "Healthy"
 
-    return JSONResponse(content={"prediction": label})
+    # 💊 Get medicine suggestion from Gemini 2.5 Flash
+    try:
+        medicine_suggestion = get_medicine_suggestion(label, animal_type)
+    except Exception as e:
+        medicine_suggestion = f"Failed to fetch suggestion: {str(e)}"
+
+    return JSONResponse(content={
+        "prediction": label,
+        "medicine_suggestion": medicine_suggestion
+    })
