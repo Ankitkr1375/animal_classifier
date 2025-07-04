@@ -42,7 +42,10 @@ async def predict(
     # Normalize label for healthy cases
     if label in ["Health", "Lumpy Skin"]:
         label = "Healthy"
-
+    if label in ["Flea_Allergy"]:
+        label = "Flea Allergy"
+    if label in ["Fungal_infections"]:
+        label = "Fungal infections"
     # 💊 Get medicine suggestion from Gemini 2.5 Flash
     try:
         medicine_suggestion = get_medicine_suggestion(label, animal_type)
