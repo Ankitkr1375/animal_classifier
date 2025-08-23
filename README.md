@@ -2,6 +2,7 @@
 
 This project is a **FastAPI-based backend** that classifies common skin conditions in **dogs, cats, and cows** using pre-trained TensorFlow/Keras models.  
 It also provides **medicine suggestions** for the predicted disease using **Gemini (via `med.py`)**.
+NOTE: Create and load your own Gemini api key before running the app.
 
 ---
 
