@@ -18,6 +18,7 @@ It also provides **medicine suggestions** for the predicted disease using **Gemi
 ---
 
 ## 📂 Project Structure
+```plaintext
 .
 ├── app.py              # Main FastAPI application
 ├── model_loader.py     # Handles lazy loading of Keras models
