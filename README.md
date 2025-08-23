@@ -18,15 +18,17 @@ It also provides **medicine suggestions** for the predicted disease using **Gemi
 ---
 
 ## 📂 Project Structure
-├── app.py # Main FastAPI application
-├── model_loader.py # Handles lazy loading of Keras models
-├── utils.py # Utility functions (e.g., image preprocessing)
-├── med.py # Gemini API integration for medicine suggestions
-├── Dog.keras # Pre-trained dog model
-├── cat.keras # Pre-trained cat model
-├── cow.keras # Pre-trained cow model
-├── requirements.txt # Python dependencies
-└── README.md # Project documentation
+.
+├── app.py              # Main FastAPI application
+├── model_loader.py     # Handles lazy loading of Keras models
+├── utils.py            # Utility functions (e.g., image preprocessing)
+├── med.py              # Gemini API integration for medicine suggestions
+├── Dog.keras           # Pre-trained dog model
+├── cat.keras           # Pre-trained cat model
+├── cow.keras           # Pre-trained cow model
+├── requirements.txt    # Python dependencies
+└── README.md           # Project documentation
+
 
 ---
 
